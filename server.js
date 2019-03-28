@@ -6,6 +6,9 @@ const morgan       = require('morgan');
 const favicon      = require('serve-favicon');
 const cors         = require('cors');
 
+// ROUTES
+const user = require('./routes/api/users');
+
 const app = express();
 
 // bodyparser
@@ -26,9 +29,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 // @route GET /
 // @desc Loads index page
 
-app.get('/', (req, res) => {
-    res.send("hi tehre");
-})
+app.use('/api/users', user);
 
 app.use(function (req, res){
     res.status(400).send("Oops somehting wrong in url");
