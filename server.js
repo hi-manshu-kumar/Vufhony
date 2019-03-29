@@ -7,6 +7,7 @@ const favicon      = require('serve-favicon');
 const cors         = require('cors');
 
 // ROUTES
+const routes = require('./routes/index');
 const user = require('./routes/api/users');
 
 const app = express();
@@ -20,6 +21,7 @@ app.use(cookieParser());
 
 app.use(cors());
 app.use(morgan('dev'));
+app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 
 // static file config
 app.use(express.static(path.join(__dirname, 'public')));
@@ -28,7 +30,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // @route GET /
 // @desc Loads index page
-
+app.use('/', routes);
 app.use('/api/users', user);
 
 app.use(function (req, res){

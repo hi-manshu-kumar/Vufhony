@@ -98,4 +98,18 @@ router.put('/update_profile', auth, (req, res)=> {
     );
 });
 
+// @route   GET api/users/logout
+// @desc    Check for token
+// @access  Private
+
+
+router.get('/auth', auth, (req, res) => {
+    res.status(200).json({
+        isAuth   : true,
+        email    : req.user.email,
+        name     : req.user.name,
+        lastname : req.user.lastname
+    })
+});
+
 module.exports = router;
